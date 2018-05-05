@@ -1,6 +1,6 @@
 package protocol
 
 const (
-	EstablishConnectionCode = 1
-	SendMessageCode         = 2
+	ConnectionEstablished = 1
+	MessageSent           = 2
 )

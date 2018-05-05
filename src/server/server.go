@@ -5,7 +5,7 @@ import (
 	"io"
 	"net"
 
-	"../protocol"
+	"protocol"
 )
 
 func getRequestFrom(conn net.Conn) protocol.Request {
@@ -50,9 +50,9 @@ func sendMessage(request *protocol.Request, conn *net.Conn, activeConnections *m
 }
 
 func processRequest(request *protocol.Request, conn *net.Conn, activeConnections *map[string]*net.Conn) {
-	if request.Code == protocol.EstablishConnectionCode {
+	if request.Code == protocol.ConnectionEstablished {
 		establishConnection(request.Sender, conn, activeConnections)
-	} else if request.Code == protocol.SendMessageCode {
+	} else if request.Code == protocol.MessageSent {
 		sendMessage(request, conn, activeConnections)
 	} else {
 		closeConnection(request.Sender, conn, activeConnections)
