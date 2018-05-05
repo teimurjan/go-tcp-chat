@@ -14,8 +14,8 @@ build:
 	$(GOBUILD) -o $(CLIENT_OUT_NAME) ${GOPATH}/$(CLIENT_SRC)
 
 clean:
-	@[ -f ./$(SERVER_NAME) ] && rm ./$(SERVER_NAME) || true
-	@[ -f ./$(CLIENT_NAME) ] && rm ./$(CLIENT_NAME) || true
+	@[ -f ./$(SERVER_OUT_NAME) ] && rm ./$(SERVER_OUT_NAME) || true
+	@[ -f ./$(CLIENT_OUT_NAME) ] && rm ./$(CLIENT_OUT_NAME) || true
 
 run:
 	$(GOBUILD) -o $(SERVER_OUT_NAME) ${GOPATH}/$(SERVER_SRC)
