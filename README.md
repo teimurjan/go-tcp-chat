@@ -19,3 +19,11 @@ To run server
 To run client
 
 > `cli`
+
+To remove all object files
+
+> `make clean`
+
+To compile sources and run server
+
+> `make run`
