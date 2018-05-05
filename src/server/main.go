@@ -1,11 +1,24 @@
 package server
 
 import (
+	"io"
 	"net"
+
+	"../protocol"
 )
 
-func handleConnection(conn *net.Conn) {
+func handleConnection(conn net.Conn) protocol.Protocol {
+	buffer := make([]byte, 0, bufferCapacity)
 
+	_, err := conn.Read(buffer)
+	if err != nil && err != io.EOF {
+		handleError(err)
+	}
+
+	decodedProtocol := protocol.Protocol{}
+	protocol.Decode(buffer, &decodedProtocol)
+
+	return decodedProtocol
 }
 
 func Start() {
@@ -21,7 +34,7 @@ func Start() {
 			logError(err.Error())
 		} else {
 			logMessage("Connection established")
-			handleConnection(&conn)
+			protocol := handleConnection(conn)
 		}
 	}
 }
