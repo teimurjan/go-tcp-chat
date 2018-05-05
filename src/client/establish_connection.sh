@@ -1,0 +1,1 @@
+echo "{\"Code\":1,\"Sender\":\"$1\"}" | nc localhost 8888

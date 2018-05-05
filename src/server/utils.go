@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"time"
 )
 
 func formatAddress(port int) string {
@@ -17,10 +18,20 @@ func handleError(e error) {
 	}
 }
 
-func logMessage(text string) {
-	fmt.Fprint(os.Stdout, messageLog{body: text})
+func log(text string, isError bool) {
+	message := fmt.Sprintf("%v: %v\n", time.Now().UTC(), text)
+	if isError {
+		message = "ERROR: " + message
+	} else {
+		message = "DEBUG: " + message
+	}
+	fmt.Fprint(os.Stdout, message)
 }
 
 func logError(text string) {
-	fmt.Fprint(os.Stderr, messageLog{body: text, isError: true})
+	log(text, true)
+}
+
+func logMessage(text string) {
+	log(text, false)
 }
